@@ -9,6 +9,14 @@
       "prioritary": true
     },
     {
+      "lostObject": "Laptop",
+      "place": {
+        "faculty": "Derecho"
+      },
+      "photo": "../src/images/backpack.jpg",
+      "prioritary": true
+    },
+    {
       "lostObject": "Lapicera",
       "place": {
         "faculty": "Administración"
@@ -23,14 +31,6 @@
       },
       "photo": "../src/images/backpack.jpg",
       "prioritary": false
-    },
-    {
-      "lostObject": "Laptop",
-      "place": {
-        "faculty": "Derecho"
-      },
-      "photo": "../src/images/backpack.jpg",
-      "prioritary": true
     },
     {
       "lostObject": "Topper",
