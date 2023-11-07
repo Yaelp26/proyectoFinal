@@ -1,7 +1,35 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import "../scss/styles.sass";
 ---
 
 <Layout title="proyectoFinal">
-	<h1 class="text-primary">Hola astro w bootstrap</h1>
+	<div class=" container d-flex justify-content-center align-items-center vh-100">
+		<div class="login-box row w-5 justify-content-center bg-indigo overflow-y-auto">
+			<div class="row">
+				<h1 class="text-light text-center my-2">BUAP</h1>
+			</div>
+			<div>
+				<form class="col-12 text-white text-center p-3 align-items-center">
+					<div class="mb-3">
+						<label for="userInput" class="d-flex flex-column align-items-center">User
+							<input type="text" class="rounded-pill border-0 my-2" id="userInput">
+						</label>
+					</div>
+					<div class="mb-3">
+						<label for="userInput" class="d-flex flex-column align-items-center">Student Register
+							<input type="text" class="rounded-pill border-0 my-2" id="userInput">
+						</label>
+					</div>
+					<button type="submit" class="btn btn-primary rounded-pill">Login</button>
+				</form>
+			</div>
+		</div>
+	</div>
 </Layout>
+
+<style>
+	.login-box{
+		border-radius: 2rem;
+			}
+</style>
