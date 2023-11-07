@@ -1,0 +1,72 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Card from "../components/Card.astro";
+import faculties from "../constants/faculties.js";
+import type { LostItem, LostItemsAPI } from "../types/lost_object.js";
+import json from "../examples/lost_items.json";
+
+const { lostItems: items } = JSON.parse(JSON.stringify(json)) as LostItemsAPI;
+let i = 1;
+---
+
+<Layout title="search">
+    <div class="container">
+        <div class="row w-5 justify-content-center">
+            <form
+                class="search-box col-10 bg-blue d-flex flex-lg-row flex-sm-column align-items-center justify-content-evenly rounded-5 text-white fs-5"
+            >
+                <label for="place" class="text-center"
+                    >Faculty
+                    <select
+                        id="place"
+                        name="place"
+                        class="rounded-pill border-0 px-3 text-black"
+                    >
+                        {faculties.map((f) => <option value={i++}>{f}</option>)}
+                    </select>
+                </label>
+                <label for="search-bar" class="text-center flex-grow-1"
+                    >Lost Object
+                    <input
+                        type="text"
+                        name="search-bar"
+                        id="search-bar"
+                        class="rounded-pill border-0 px-3 text-black"
+                    />
+                </label>
+            </form>
+        </div>
+        <div class="object-box">
+            {
+                items.map((item) => (
+                    <Card
+                        name={item.lostObject}
+                        place={item.place}
+                        photo={item.photo}
+                        important={item.prioritary}
+                    />
+                ))
+            }
+        </div>
+    </div>
+</Layout>
+<style>
+    .row {
+        margin-top: 5rem;
+    }
+    .search-box {
+        padding: 2rem 4rem;
+        gap: 4rem;
+    }
+    input,
+    select {
+        width: 100%;
+        margin-top: 1rem;
+    }
+    .object-box {
+        margin-top: 5rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2.5rem;
+    }
+</style>
