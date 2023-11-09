@@ -1,8 +1,40 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import "../scss/styles.sass";
----
 
+
+---
+<script>
+
+		function isUsername(user:string) 
+		{
+			return /^[a-zA-Z\s]+$/.test(user);
+		}
+
+		function isRegister(register:string) 
+		{
+ 			 return /^\d{9}$/.test(register);
+		}
+
+		const username = document.getElementById('username') as HTMLInputElement
+		const register = document.getElementById('register') as HTMLInputElement
+		const login = document.getElementById('login')
+
+		if(login == null){
+			console.log("ERROR MAXIMO")
+		}
+		else{
+			login.addEventListener('click', (e) =>{
+				if(!isRegister(register.value) || !isUsername(username.value)){
+					alert("Ingresa los valores como se muestra en los ejemplos");
+				}
+				else{
+					alert("Campos correctamente llenados")
+				}
+			})
+		}
+
+	</script>
 <Layout title="proyectoFinal">
 	<div class=" container d-flex justify-content-center align-items-center vh-100">
 		<div class="login-box row w-5 justify-content-center bg-indigo overflow-y-auto">
@@ -12,24 +44,27 @@ import "../scss/styles.sass";
 			<div>
 				<form class="col-12 text-white text-center p-3 align-items-center">
 					<div class="mb-3">
-						<label for="userInput" class="d-flex flex-column align-items-center">User
-							<input type="text" class="rounded-pill border-0 my-2" id="userInput">
+						<label class="d-flex flex-column align-items-center">User
+							<input type="text" placeholder="Juanito Perez" class="rounded-pill border-0 my-2" id="username">
 						</label>
 					</div>
 					<div class="mb-3">
-						<label for="userInput" class="d-flex flex-column align-items-center">Student Register
-							<input type="text" class="rounded-pill border-0 my-2" id="userInput">
+						<label class="d-flex flex-column align-items-center">Student Register
+							<input type="password" placeholder="202212345" class="rounded-pill border-0 my-2" id="register">
 						</label>
 					</div>
-					<button type="submit" class="btn btn-primary rounded-pill">Login</button>
+					<button type="submit" class="btn btn-primary rounded-pill" id="login">Login</button>
 				</form>
 			</div>
 		</div>
 	</div>
+
+	
 </Layout>
 
 <style>
 	.login-box{
 		border-radius: 2rem;
 			}
+			
 </style>
