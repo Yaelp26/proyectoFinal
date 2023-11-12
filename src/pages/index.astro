@@ -1,106 +1,115 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import "../scss/styles.sass";
-
-
 ---
+
 <script>
+	function isUsername(user: string) {
+		return /^[a-zA-Z]+(\s[a-zA-Z]+)?$/.test(user); //Cambie la funcion para que acepte solamente un Espacio en cualquier lugar de la cadena
+	}
 
-		function isUsername(user:string) 
-		{
-			return /^[a-zA-Z]+(\s[a-zA-Z]+)?$/.test(user); //Cambie la funcion para que acepte solamente un Espacio en cualquier lugar de la cadena
-		}
+	function isRegister(register: string) {
+		return /^\d{9}$/.test(register);
+	}
 
-		function isRegister(register:string) 
-		{
- 			 return /^\d{9}$/.test(register);
-		}
+	const username = document.getElementById("username") as HTMLInputElement;
+	const register = document.getElementById("register") as HTMLInputElement;
+	const login = document.getElementById("login");
 
-		const username = document.getElementById('username') as HTMLInputElement
-		const register = document.getElementById('register') as HTMLInputElement
-		const login = document.getElementById('login')
-
-		if(login == null){
-			console.log("ERROR MAXIMO")
-		}
-		else{
-			login.addEventListener('click', (e) =>{
-				if(!isRegister(register.value) || !isUsername(username.value)){
-					e.preventDefault()
-					alert("Ingresa los valores como se muestra en los ejemplos");
-				}
-				else{
-					const data = {  //datos declarados en la constante data
-						username : username.value, 
-						register : register.value
-					}
-				}
-			})
-		}
-
+	if (login == null) {
+		console.log("ERROR MAXIMO");
+	} else {
+		login.addEventListener("click", (e) => {
+			if (!isRegister(register.value) || !isUsername(username.value)) {
+				e.preventDefault();
+				alert("Ingresa los valores como se muestra en los ejemplos");
+			} else {
+				const data = {
+					//datos declarados en la constante data
+					username: username.value,
+					register: register.value,
+				};
+			}
+		});
+	}
 </script>
 
 <Layout title="proyectoFinal">
-	<div class=" pageContainer d-flex justify-content-center align-items-center vh-100">
+	<div
+		class="pageContainer d-flex justify-content-center align-items-center vh-100"
+	>
 		<div class="login-box row justify-content-center overflow-y-auto">
 			<div class="row">
 				<h1 class="pageName text-light text-center my-2">LOST BUAP</h1>
 			</div>
 			<div>
-				<form class="col-12 text-white text-center p-3 align-items-center">
+				<form
+					class="col-12 text-white text-center p-3 align-items-center"
+				>
 					<div class="mb-3">
-						<label class="d-flex flex-column align-items-center">User
-							<input type="text" placeholder="Juanito Perez" class="rounded-pill border-0 my-2" id="username">
+						<label class="d-flex flex-column align-items-center"
+							>User
+							<input
+								type="text"
+								placeholder="Juanito Perez"
+								class="rounded-pill border-0 my-2"
+								id="username"
+							/>
 						</label>
 					</div>
 					<div class="mb-3">
-						<label class="d-flex flex-column align-items-center"> Register
-							<input type="password" placeholder="202212345" class="rounded-pill border-0 my-2" id="register">
+						<label class="d-flex flex-column align-items-center">
+							Register
+							<input
+								type="password"
+								placeholder="202212345"
+								class="rounded-pill border-0 my-2"
+								id="register"
+							/>
 						</label>
 					</div>
-					<button type="submit" class="btn rounded-pill" id="login">Login</button>
+					<button type="submit" class="btn rounded-pill" id="login"
+						>Login</button
+					>
 				</form>
 			</div>
 		</div>
 	</div>
-
 </Layout>
 
 <style>
-	 .pageContainer{
+	.pageContainer {
 		margin: 0;
 		padding: 0;
-		background: linear-gradient(150deg, #0D5381, #7A6C6C);
-  	}
+		background: linear-gradient(150deg, #0d5381, #7a6c6c);
+	}
 	.pageName {
 		font-size: 90px;
 		font-family: fantasy;
 		overflow: hidden;
 		white-space: nowrap;
 		animation: writeAnimation 3s steps(35, end);
-		
 	}
 
 	@keyframes writeAnimation {
 		from {
-		width: 0;
+			width: 0;
 		}
 		to {
-		width: 100%;
+			width: 100%;
 		}
 	}
-	label{
-		font-family:Arial, Helvetica, sans-serif;
+	label {
+		font-family: Arial, Helvetica, sans-serif;
 	}
-	input{
+	input {
 		text-align: center;
 	}
 	input::placeholder {
 		color: #999; /* Change the color to your preference */
 		font-style: italic;
 	}
-	button{
-		border: 1px solid #d1cece; 
+	button {
+		border: 1px solid #d1cece;
 		color: white;
 	}
 </style>
