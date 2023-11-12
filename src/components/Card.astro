@@ -9,7 +9,7 @@ interface Props {
 const { name, place, photo, important } = Astro.props;
 ---
 
-<div
+<div 
     class:list={[
         "item_c text-white text-center rounded-5",
         { "bg-danger": important, "bg-primary": !important },
@@ -20,12 +20,20 @@ const { name, place, photo, important } = Astro.props;
         {name}
     </h3>
     <p>{place.faculty}</p>
+    <button class="btn reclaimButton rounded-pill mb-3">Reclaim</button>
 </div>
 <style>
     .item_c {
         width: 12rem;
-        height: 18rem;
+        height: ;
         overflow: hidden;
+    }
+    .reclaimButton{
+        background-color: #834E21;
+        border: 1px solid transparent;
+        padding: .30rem .25rem;
+        font-size: 1rem;
+        line-height: 1.5;
     }
     img {
         height: 10rem;
