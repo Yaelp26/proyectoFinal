@@ -1,39 +1,44 @@
 ---
-import { type Place } from "../types/lost_object";
 interface Props {
     name: string;
-    place: Place;
+    place: string | undefined;
     photo: string;
     important: boolean;
 }
 const { name, place, photo, important } = Astro.props;
 ---
 
-<div 
+<div
     class:list={[
         "item_c text-white text-center rounded-5",
         { "bg-danger": important, "bg-primary": !important },
     ]}
 >
     <img src={photo} alt="object" />
-    <h3 class="mt-3">
-        {name}
-    </h3>
-    <p>{place.faculty}</p>
+    <div class="text">
+        <h3 class="mt-3">
+            {name}
+        </h3>
+        <p>{place}</p>
+    </div>
+
     <button class="btn reclaimButton rounded-pill">Reclaim</button>
 </div>
 <style>
     .item_c {
-        width: 12rem;
         height: 20.5rem;
         overflow: hidden;
     }
-    .reclaimButton{
-        background-color: rgba(75, 61, 55, 0.900);
+    .reclaimButton {
+        background-color: rgb(75, 61, 55);
         border: 1px solid transparent;
-        padding: .30rem .25rem;
+        padding: 0.3rem 0.25rem;
         font-size: 1rem;
         line-height: 1.5;
+    }
+
+    .text {
+        margin: 0 1rem;
     }
     img {
         height: 10rem;

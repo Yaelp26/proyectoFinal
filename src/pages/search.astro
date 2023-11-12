@@ -47,12 +47,16 @@ let i = 1;
                                 name="place"
                                 class="rounded-pill border-0 px-3 text-black"
                             >
-                                <option value="" disabled selected
-                                    >Select Faculty</option
+                                <option
+                                    value="0"
+                                    disabled
+                                    selected
+                                    class="text-center"
+                                    >-- Selecciona una facultad --</option
                                 >
                                 {
-                                    faculties.map((f) => (
-                                        <option value={i++}>{f}</option>
+                                    Places.map((p) => (
+                                        <option value={i++}>{p.faculty}</option>
                                     ))
                                 }
                             </select>
@@ -85,12 +89,14 @@ let i = 1;
             >
                 {
                     //page changes by filter
-                    items.map((item) => (
+                    LostObjects.map((lo) => (
                         <Card
-                            name={item.lostObject}
-                            place={item.place}
-                            photo={item.photo}
-                            important={item.prioritary}
+                            name={lo.object_name}
+                            place={
+                                Places.find((e) => e.id == lo.place)?.faculty
+                            }
+                            photo={lo.img}
+                            important={lo.important}
                         />
                     ))
                 }
