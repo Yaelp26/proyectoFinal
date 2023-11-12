@@ -1,25 +1,30 @@
-export interface LostItemsAPI {
-    lostItems: LostItem[];
+export interface LostObjectAPI {
+    LostObjects: LostObject[];
 }
 
-export interface LostItem {
-    lostObject: string;
-    place: Place;
-    photo: string;
-    prioritary: boolean;
+export interface LostObject {
+    id: number;
+    object_name: string;
+    place: number;
+    img: string;
+    important: boolean;
+}
+
+export interface ValidPlaces {
+    Places: Place[];
 }
 
 export interface Place {
-    faculty: "Ciencias de la Computación" |
-    "Derecho" |
-    "Fisco-Matemáticas" |
-    "Bilogía" |
-    "Farmacobiología" |
-    "Ingenierias" |
-    "Arquitectura" |
-    "Artes" |
-    "Cultura Física" |
-    "Contabilidad" |
-    "Administración"
+    id: number;
+    faculty: string;
 }
 
+export interface StudentsAPI {
+    Students: Student[];
+}
+
+export interface Student {
+    register: number;
+    first_name: string;
+    last_name: string;
+}
