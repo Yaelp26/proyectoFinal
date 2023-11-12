@@ -1,11 +1,13 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Card from "../components/Card.astro";
-import faculties from "../constants/faculties.js";
-import type { LostItem, LostItemsAPI } from "../types/lost_object.js";
-import json from "../examples/lost_items.json";
+import type { LostObjectAPI, ValidPlaces } from "../types/lost_object";
 
-const { lostItems: items } = JSON.parse(JSON.stringify(json)) as LostItemsAPI;
+const lo_res = await fetch("http://192.168.100.21:4321/lost_object");
+const p_res = await fetch("http://192.168.100.21:4321/lost_object/places");
+
+const { LostObjects } = (await lo_res.json()) as LostObjectAPI;
+const { Places } = (await p_res.json()) as ValidPlaces;
 let i = 1;
 ---
 
@@ -18,15 +20,16 @@ let i = 1;
     const lostObject = document.getElementById("place") as HTMLInputElement;
     const faculty = document.getElementById("search-bar") as HTMLInputElement;
     const filter = document.getElementById("filter");
-    const reportButton = document.getElementById('reportButton') as HTMLButtonElement;
+    const reportButton = document.getElementById(
+        "reportButton",
+    ) as HTMLButtonElement;
 
     if (!isLostObject(lostObject.value)) {
     }
 
-    reportButton.onclick = function() {
+    reportButton.onclick = function () {
         window.location.href = "";
-    }
-
+    };
 </script>
 
 <Layout title="search">
@@ -37,10 +40,7 @@ let i = 1;
                     class="search-box col-10 bg-blue d-flex flex-column align-items-center justify-content-evenly rounded-5 text-white fs-5"
                 >
                     <div class="d-flex align-items-center">
-                        <label
-                            for="place"
-                            class="text-center mx-2 mb-2 "
-                        >
+                        <label for="place" class="text-center mx-2 mb-2">
                             Faculty
                             <select
                                 id="place"
@@ -96,9 +96,11 @@ let i = 1;
                 }
             </div>
             <div
-                class="lost-box container d-flex flex-column col-6 align-items-center justify-content-center rounded-4 "
+                class="lost-box container d-flex flex-column col-6 align-items-center justify-content-center rounded-4"
             >
-                <p class="font-urbanist text-center mt-2">YOU LOST SOMETHING?</p>
+                <p class="font-urbanist text-center mt-2">
+                    YOU LOST SOMETHING?
+                </p>
                 <button type="button" class="btn mb-1" id="reportButton"
                     >REPORT HERE</button
                 >
