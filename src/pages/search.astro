@@ -18,9 +18,15 @@ let i = 1;
     const lostObject = document.getElementById("place") as HTMLInputElement;
     const faculty = document.getElementById("search-bar") as HTMLInputElement;
     const filter = document.getElementById("filter");
+    const reportButton = document.getElementById('reportButton') as HTMLButtonElement;
 
     if (!isLostObject(lostObject.value)) {
     }
+
+    reportButton.onclick = function() {
+        window.location.href = "";
+    }
+
 </script>
 
 <Layout title="search">
@@ -33,7 +39,7 @@ let i = 1;
                     <div class="d-flex align-items-center">
                         <label
                             for="place"
-                            class="text-center mx-2 mb-2 font-roboto"
+                            class="text-center mx-2 mb-2 "
                         >
                             Faculty
                             <select
@@ -90,11 +96,11 @@ let i = 1;
                 }
             </div>
             <div
-                class="lost-box container d-flex flex-column col-6 align-items-center justify-content-center rounded-4 mb-3"
+                class="lost-box container d-flex flex-column col-6 align-items-center justify-content-center rounded-4 "
             >
-                <p class="text-center mt-2">You lost something?</p>
-                <button type="submit" class="btn mb-2" id="report"
-                    >Report here</button
+                <p class="font-urbanist text-center mt-2">YOU LOST SOMETHING?</p>
+                <button type="button" class="btn mb-1" id="reportButton"
+                    >REPORT HERE</button
                 >
             </div>
         </div>
@@ -111,14 +117,11 @@ let i = 1;
         padding: 2rem;
         gap: 2rem;
         background-color: rgba(21, 72, 129, 0.712);
-        font-family: Arial, Helvetica, sans-serif;
     }
     input,
     select {
         width: 100%;
         margin-top: 1rem;
-        font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-            "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
     }
     .object-box {
         margin-top: 5rem;
@@ -128,8 +131,9 @@ let i = 1;
     .lost-box {
         background-color: #ffaa33d0;
         color: #1f3b59;
-        font-size: 25px;
-        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-size: 2rem;
+        font-weight: 600;
+        margin-bottom: 2rem;
     }
     .warning-message {
         text-align: center;
@@ -143,13 +147,13 @@ let i = 1;
             0 12px 16px 0 rgba(0, 0, 0, 0.24),
             0 17px 50px 0 rgba(0, 0, 0, 0.19);
     }
-    #report {
+    #reportButton {
         color: rgba(163, 5, 5, 0.897);
-        font-family: monospace;
+        font-size: 2rem;
         border: 0px;
         background-color: transparent;
     }
-    #report:hover {
+    #reportButton:hover {
         box-shadow:
             0 12px 16px 0 rgba(167, 102, 48, 0.24),
             0 17px 50px rgba(202, 155, 25, 0.19);

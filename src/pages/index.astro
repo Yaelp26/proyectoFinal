@@ -39,7 +39,7 @@ import Layout from "../layouts/Layout.astro";
 	>
 		<div class="login-box row justify-content-center overflow-y-auto">
 			<div class="row">
-				<h1 class="pageName text-light text-center my-2">LOST BUAP</h1>
+				<h1 class="pageName text-light text-center font-roboto">LOST BUAP</h1>
 			</div>
 			<div>
 				<form
@@ -51,7 +51,7 @@ import Layout from "../layouts/Layout.astro";
 							<input
 								type="text"
 								placeholder="Juanito Perez"
-								class="rounded-pill border-0 my-2"
+								class="rounded-pill border-0"
 								id="username"
 							/>
 						</label>
@@ -62,7 +62,7 @@ import Layout from "../layouts/Layout.astro";
 							<input
 								type="password"
 								placeholder="202212345"
-								class="rounded-pill border-0 my-2"
+								class="rounded-pill border-0"
 								id="register"
 							/>
 						</label>
@@ -83,11 +83,13 @@ import Layout from "../layouts/Layout.astro";
 		background: linear-gradient(150deg, #0d5381, #7a6c6c);
 	}
 	.pageName {
-		font-size: 90px;
-		font-family: fantasy;
+		font-size: 8rem;
 		overflow: hidden;
 		white-space: nowrap;
 		animation: writeAnimation 3s steps(35, end);
+		margin-bottom: 10rem;
+		font-weight: 600;
+        letter-spacing: 1.5rem;
 	}
 
 	@keyframes writeAnimation {
@@ -99,17 +101,20 @@ import Layout from "../layouts/Layout.astro";
 		}
 	}
 	label {
-		font-family: Arial, Helvetica, sans-serif;
+		font-size: 2rem;
+		font-weight: lighter;
 	}
 	input {
 		text-align: center;
+		font-size: 1.5rem;
+		margin: 1rem;
 	}
 	input::placeholder {
 		color: #999; /* Change the color to your preference */
 		font-style: italic;
 	}
 	button {
-		border: 1px solid #d1cece;
+		font-size: 1.5rem;
 		color: white;
 	}
 </style>
