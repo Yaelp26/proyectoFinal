@@ -3,8 +3,8 @@ import Layout from "../layouts/Layout.astro";
 import Card from "../components/Card.astro";
 import type { LostObjectAPI, ValidPlaces } from "../types/lost_object";
 
-const lo_res = await fetch("http://192.168.100.53:4321/lost_object");
-const p_res = await fetch("http://192.168.100.53:4321/lost_object/places");
+const lo_res = await fetch("http://127.0.0.1:8000/lost_object");
+const p_res = await fetch("http://127.0.0.1:8000/lost_object/places");
 
 const { LostObjects } = (await lo_res.json()) as LostObjectAPI;
 const { Places } = (await p_res.json()) as ValidPlaces;
