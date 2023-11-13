@@ -3,8 +3,8 @@ import Layout from "../layouts/Layout.astro";
 import Card from "../components/Card.astro";
 import type { LostObjectAPI, ValidPlaces } from "../types/lost_object";
 
-const lo_res = await fetch("http://192.168.100.21:4321/lost_object");
-const p_res = await fetch("http://192.168.100.21:4321/lost_object/places");
+const lo_res = await fetch("http://192.168.100.53:4321/lost_object");
+const p_res = await fetch("http://192.168.100.53:4321/lost_object/places");
 
 const { LostObjects } = (await lo_res.json()) as LostObjectAPI;
 const { Places } = (await p_res.json()) as ValidPlaces;
@@ -37,7 +37,7 @@ let i = 1;
         <div class="container justify-content-center align-items-center">
             <div class="row justify-content-center">
                 <form
-                    class="search-box col-10 bg-blue d-flex flex-column align-items-center justify-content-evenly rounded-5 text-white fs-5"
+                    class="search-box col-10 bg-blue d-flex flex-column align-items-center justify-content-evenly rounded-5 text-light fs-5"
                 >
                     <div class="d-flex align-items-center">
                         <label for="place" class="text-center mx-2 mb-2">

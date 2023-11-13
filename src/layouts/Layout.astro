@@ -1,7 +1,4 @@
 ---
-import "bootstrap/dist/css/bootstrap.min.css";
-import bootstrap from "bootstrap/dist/js/bootstrap.bundle.min.js?url";
-
 interface Props {
     title: string;
 }
@@ -13,21 +10,18 @@ const { title } = Astro.props;
     <head>
         <meta charset="utf-8" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="stylesheet" href="css/main.min.css" />
+        <link rel="stylesheet" href="css/main.min.css.map" />
         <meta name="viewport" content="width=device-width" />
         <meta name="generator" content={Astro.generator} />
         <title>{title}</title>
     </head>
-    <body class="font-body bg-dark">
+    <body class="gradient-bg-form font-family-text">
         <slot />
     </body>
 </html>
-<style is:global>
-    @import url('https://fonts.googleapis.com/css2?family=Lato:&family=Urbanist:&display=swap');
-
-    .font-urbanist {
-        font-family: "Urbanist", sans-serif;
-    }
-    .font-body{
-        font-family: "Lato", sans-serif;
+<style>
+    body {
+        margin: 0;
     }
 </style>
