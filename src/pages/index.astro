@@ -1,9 +1,30 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import type { Student } from "../types/lost_object";
+const a = Astro.request
+if (a.method == 'POST')
+{
+	const data= (await(a.text()));
+	const datas = data.split("&").map(e=> e.split("=").map(c=> c.split("+")))
+	console.log(datas);
+	const s_est:Student = await fetch("http://127.0.0.1:8000/student/"+datas[1][1] )
+	.then(response => {
+		if (response.status === 404) {
+		throw new Error('Not found');
+		}
+		return response.json();
+	})
+	.catch(error => console.error(error));
+	console.log(s_est)
+	if(s_est != undefined && s_est.first_name == datas[0][1][0] && s_est.last_name == datas[0][1][1] )
+	{
+		return Astro.redirect("/search");
+	}
+}
 ---
 
 <script>
-	function isUsername(user: string) {
+	/*function isUsername(user: string) {
 		return /^[a-zA-Z]+(\s[a-zA-Z]+)?$/.test(user); //Cambie la funcion para que acepte solamente un Espacio en cualquier lugar de la cadena
 	}
 
@@ -23,41 +44,48 @@ import Layout from "../layouts/Layout.astro";
 				e.preventDefault();
 				alert("Ingresa los valores como se muestra en los ejemplos");
 			} else {
-				const data = {
-					//datos declarados en la constante data
-					username: username.value,
-					register: register.value,
-				};
+				const data = { title: 'foo', body: 'bar', userId: 1 };
+				fetch("/index.html", {
+				method: 'POST',
+				body: JSON.stringify(data),
+				headers: {
+					'Content-type': 'application/json; charset=UTF-8',
+				},
+				})
+
 			}
 		});
-	}
+	}*/
 </script>
 
-<Layout title="proyectoFinal">
+<Layout title="Lost Buap">
 	<div class="container">
 		<div class="row justify-content-center align-content-around">
-			<h1 class="col-10 text-light text-center font-family-logo">
+			<h1 class=" col-10 index-logo text-center font-family-logo">
 				LOST BUAP
 			</h1>
 			<form
-				class="col-4 text-light text-center bg-translucid rounded-4 justify-content-center"
+				class="col-4 text-light text-center bg-translucid rounded-4 justify-content-center" id="datos" method="POST"
 			>
 				<label class="d-flex flex-column justify-content-around"
 					>User
 					<input
+						name="username"
 						type="text"
 						placeholder="Juanito Perez"
 						class="input-button"
-						id="button"
+						id="username"
+						autocomplete="off"
 					/>
 				</label>
 				<label class="d-flex flex-column justify-content-around">
 					Register
 					<input
+						name="register"
 						type="password"
 						placeholder="202212345"
 						class="input-button"
-						id="button "
+						id="register"
 					/>
 				</label>
 				<button type="submit" class="button" id="login">Login</button>
@@ -69,11 +97,6 @@ import Layout from "../layouts/Layout.astro";
 <style>
 	.row {
 		height: 100vh;
-	}
-	h1 {
-		font-size: 8rem;
-		letter-spacing: 1.5rem;
-		margin: 0;
 	}
 	form {
 		padding: 2rem;
