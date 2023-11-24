@@ -2,32 +2,37 @@
 import Layout from "../layouts/Layout.astro";
 import type { Student } from "../types/lost_object";
 const a = Astro.request
+
 if (a.method == 'POST')
 {
-	const data= (await(a.text()));
-	const decodedData = decodeURIComponent(data);
-	const datas = decodedData.split("&").map(e => e.split("=").map(c => c.split("+")));
-	console.log(datas);
-	const s_est:Student = await fetch("http://127.0.0.1:8000/student/"+datas[1][1] )
-	.then(response => {
-		if (response.status === 404) {
-		throw new Error('Not found');
-		}
-		return response.json();
-	})
-	.catch(error => console.error(error));
-	console.log(s_est)
-	if(s_est != undefined && s_est.first_name == datas[0][1][0] && s_est.last_name == datas[0][1][1] )
-	{
-		return Astro.redirect("/search");
-	}
+    const data= (await(a.text()));
+    const decodedData = decodeURIComponent(data);
+    const datas = decodedData.split("&").map(e => e.split("=").map(c => c.split("+")));
+    console.log(datas);
+    if(datas[1]) {
+        const s_est:Student = await fetch("http://127.0.0.1:8000/student/"+datas[1][1] )
+        .then(response => {
+            if (response.status === 404) {
+            throw new Error('Not found');
+            }
+            return response.json();
+        })
+        .catch(error => console.error(error));
+        console.log(s_est)
+        if(s_est != undefined && s_est.first_name == datas[0][1][0] && s_est.last_name == datas[0][1][1] )
+        {
+            return Astro.redirect("/search");
+        }
+    } else {
+        console.log("datas[1] is undefined");
+    }
 }
 ---
 
 <script>
 
 function isUsername(user: string): boolean {
-	return /^[A-Z][a-z]*\s[A-Z][a-z]*$/.test(user);
+	return /^[A-Za-záéíóúÁÉÍÓÚñÑ\s]+$/.test(user);
 }
 
 function isRegister(register: string): boolean {
