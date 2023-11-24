@@ -5,7 +5,8 @@ const a = Astro.request
 if (a.method == 'POST')
 {
 	const data= (await(a.text()));
-	const datas = data.split("&").map(e=> e.split("=").map(c=> c.split("+")))
+	const decodedData = decodeURIComponent(data);
+	const datas = decodedData.split("&").map(e => e.split("=").map(c => c.split("+")));
 	console.log(datas);
 	const s_est:Student = await fetch("http://127.0.0.1:8000/student/"+datas[1][1] )
 	.then(response => {
@@ -24,48 +25,51 @@ if (a.method == 'POST')
 ---
 
 <script>
-	/*function isUsername(user: string) {
-		return /^[a-zA-Z]+(\s[a-zA-Z]+)?$/.test(user); //Cambie la funcion para que acepte solamente un Espacio en cualquier lugar de la cadena
-	}
 
-	function isRegister(register: string) {
-		return /^\d{9}$/.test(register);
-	}
+function isUsername(user: string): boolean {
+	return /^[A-Z][a-z]*\s[A-Z][a-z]*$/.test(user);
+}
 
-	const username = document.getElementById("username") as HTMLInputElement;
-	const register = document.getElementById("register") as HTMLInputElement;
-	const login = document.getElementById("login");
+function isRegister(register: string): boolean {
+    return /^\d{9}$/.test(register);
+}
 
-	if (login == null) {
-		console.log("ERROR MAXIMO");
-	} else {
-		login.addEventListener("click", (e) => {
-			if (!isRegister(register.value) || !isUsername(username.value)) {
-				e.preventDefault();
-				alert("Ingresa los valores como se muestra en los ejemplos");
-			} else {
-				const data = { title: 'foo', body: 'bar', userId: 1 };
-				fetch("/index.html", {
-				method: 'POST',
-				body: JSON.stringify(data),
-				headers: {
-					'Content-type': 'application/json; charset=UTF-8',
-				},
-				})
+const username = document.getElementById("username") as HTMLInputElement;
+const register = document.getElementById("register") as HTMLInputElement;
+const login = document.getElementById("login") as HTMLButtonElement;
 
-			}
-		});
-	}*/
+if (login == null) {
+    console.log("ERROR MAXIMO");
+} else {
+    login.addEventListener("click", (e) => {
+        if (!isRegister(register.value) || !isUsername(username.value)) {
+            e.preventDefault();
+			if(!isUsername(username.value))
+				alert("Ingresa un nombre valido");
+			if(!isRegister(register.value))
+            	alert("Ingresa una matricula valida");
+        } else {
+            const data = { title: 'foo', body: 'bar', userId: 1 };
+            fetch("/index.html", {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8',
+                },
+            })
+        }
+    });
+}
 </script>
 
-<Layout title="Lost Buap">
+<Layout title="Lost Buap - Login">
 	<div class="container">
 		<div class="row justify-content-center align-content-around">
-			<h1 class=" col-10 index-logo text-center font-family-logo">
+			<h1 class=" col-12 col-md-10 index-logo text-center font-family-logo">
 				LOST BUAP
 			</h1>
 			<form
-				class="col-4 text-light text-center bg-translucid rounded-4 justify-content-center" id="datos" method="POST"
+				class="col-12 col-md-4 text-light text-center bg-translucid rounded-4 justify-content-center" id="datos" method="POST"
 			>
 				<label class="d-flex flex-column justify-content-around"
 					>User
@@ -99,6 +103,7 @@ if (a.method == 'POST')
 		height: 100vh;
 	}
 	form {
+		margin-top: 0rem;
 		padding: 2rem;
 		font-size: 1.7rem;
 		height: 25rem;
@@ -110,5 +115,11 @@ if (a.method == 'POST')
 	input,
 	button {
 		font-size: 1.5rem;
+	}
+
+	.index-logo {
+		font-size: 8rem;
+		color: white;
+		margin-bottom: 0rem;
 	}
 </style>
