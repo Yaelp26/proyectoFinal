@@ -17,8 +17,6 @@ $font-family-sans-serif: system-ui, "Lato", "Urbanist";
 
 // 4. Include any default map overrides here
 
-
-
 // 5. Include remainder of required parts
 @import "../../node_modules/bootstrap/scss/maps";
 @import "../../node_modules/bootstrap/scss/mixins";
@@ -42,8 +40,10 @@ $font-family-text: "Lato";
 $bg-translucid: rgba($gray-500, .1);
 $gradiend-inclination: -75deg;
 $gradient-bg-form: -webkit-linear-gradient($gradiend-inclination, $blue-800, $gray-800);
-$gradient-bg-search: -webkit-linear-gradient($gradiend-inclination, $blue-400 $gray-200);
+$gradient-bg-search: -webkit-linear-gradient($gradiend-inclination, $blue-800 $gray-800);
 $button-border-width: .15rem;
+$bg-important:$red-700;
+$bg-non-important:$blue-700;
 
 .font-family-logo {
     font-family: $font-family-logo;
@@ -102,4 +102,12 @@ $button-border-width: .15rem;
 .input-button:focus-visible {
     outline: none;
     border-style: dashed;
+}
+
+.bg-important {
+    background-color: $bg-important;
+}
+
+.bg-non-important {
+    background-color: $bg-non-important;
 }

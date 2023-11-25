@@ -33,60 +33,47 @@ let i = 1;
 </script>
 
 <Layout title="search">
-    <div class="pageContainer d-flex">
-        <div class="container justify-content-center align-items-center">
-            <div class="row justify-content-center">
-                <form
-                    class="search-box col-10 bg-blue d-flex flex-column align-items-center justify-content-evenly rounded-5 text-light fs-5"
-                >
-                    <div class="d-flex align-items-center">
-                        <label for="place" class="text-center mx-2 mb-2">
-                            Faculty
-                            <select
-                                id="place"
-                                name="place"
-                                class="rounded-pill border-0 px-3 text-black"
-                            >
-                                <option
-                                    value="0"
-                                    disabled
-                                    selected
-                                    class="text-center"
-                                    >-- Selecciona una facultad --</option
-                                >
-                                {
-                                    Places.map((p) => (
-                                        <option value={i++}>{p.faculty}</option>
-                                    ))
-                                }
-                            </select>
-                        </label>
-                        <label
-                            for="search-bar"
-                            class="text-center mx-2 mb-2 flex-grow-1"
-                        >
-                            Lost Object
-                            <input
-                                type="text"
-                                name="search-bar"
-                                placeholder="Tupper"
-                                id="search-bar"
-                                class="rounded-pill border-0 px-3 text-black"
-                            />
-                        </label>
-                    </div>
-                    <div class="d-flex flex-column align-items-center">
-                        <button
-                            type="submit"
-                            class="btn btn-secondary rounded-pill"
-                            id="filter">Filter</button
-                        >
-                    </div>
-                </form>
-            </div>
-            <div
-                class="object-box d-flex align-items-center justify-content-center mb-5"
+    <div class="container">
+        <div class="row justify-content-center">
+            <form
+                class="col-10 text-light text-center bg-translucid rounded-4 justify-content-center"
             >
+                <div class="d-flex gap-5 flex-column flex-md-row">
+                    <label
+                        for="place"
+                        class="d-flex flex-column justify-content-around"
+                    >
+                        Faculty
+                        <select id="place" name="place" class="input-button">
+                            <option value="0" disabled selected
+                                >-- Selecciona una facultad --</option
+                            >
+                            {
+                                Places.map((p) => (
+                                    <option value={i++}>{p.faculty}</option>
+                                ))
+                            }
+                        </select>
+                    </label>
+                    <label
+                        for="search-bar"
+                        class="d-flex flex-column justify-content-around"
+                    >
+                        Lost Object
+                        <input
+                            type="text"
+                            name="search-bar"
+                            placeholder="Tupper"
+                            id="search-bar"
+                            class="input-button"
+                        />
+                    </label>
+                </div>
+                <button type="submit" class="button" id="filter">Filter</button>
+            </form>
+        </div>
+        <div class="row justify-content-center">
+            <div class="objects-box col-10">
                 {
                     //page changes by filter
                     LostObjects.map((lo) => (
@@ -101,69 +88,51 @@ let i = 1;
                     ))
                 }
             </div>
-            <div
-                class="lost-box container d-flex flex-column col-6 align-items-center justify-content-center rounded-4"
+        </div>
+        <div class="lost-something bg-important rounded-4 text-light fw-bold">
+            <p class="font-urbanist text-center mt-2">You lost someting?</p>
+            <button type="button" class="button" id="reportButton"
+                >Report Here</button
             >
-                <p class="font-urbanist text-center mt-2">
-                    YOU LOST SOMETHING?
-                </p>
-                <button type="button" class="btn mb-1" id="reportButton"
-                    >REPORT HERE</button
-                >
-            </div>
         </div>
     </div>
 </Layout>
 <style>
-    .pageContainer {
-        background: -webkit-linear-gradient(150deg, #a19d9a, #424141);
-    }
-    .row {
-        margin-top: 3rem;
-    }
-    .search-box {
+    form {
+        margin: 5rem 0;
         padding: 2rem;
-        gap: 2rem;
-        background-color: rgba(21, 72, 129, 0.712);
+        font-size: 1.7rem;
+        display: grid;
+        grid-template-rows: 3fr 1fr;
+        gap: 1.5rem;
+        justify-items: center;
+    }
+    label {
+        font-size: 1.5rem;
+        height: 3rem;
     }
     input,
+    button,
     select {
-        width: 100%;
-        margin-top: 1rem;
+        font-size: 1rem;
     }
-    .object-box {
-        margin-top: 5rem;
-        flex-wrap: wrap;
-        gap: 2.5rem;
+
+    select > option {
+        font-size: 1rem;
+        background-color: #1a1a1a;
     }
-    .lost-box {
-        background-color: #ffaa33d0;
-        color: #1f3b59;
-        font-size: 2rem;
-        font-weight: 600;
-        margin-bottom: 2rem;
+
+    .objects-box {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        grid-template-rows: repeat(2, 1fr);
+        justify-content: center;
+        gap: 2rem;
+        margin-top: 2rem;
     }
-    .warning-message {
-        text-align: center;
-        font-size: 14px;
-    }
-    #filter {
-        padding: 5px 30px;
-    }
-    #filter:hover {
-        box-shadow:
-            0 12px 16px 0 rgba(0, 0, 0, 0.24),
-            0 17px 50px 0 rgba(0, 0, 0, 0.19);
-    }
-    #reportButton {
-        color: rgba(163, 5, 5, 0.897);
-        font-size: 2rem;
-        border: 0px;
-        background-color: transparent;
-    }
-    #reportButton:hover {
-        box-shadow:
-            0 12px 16px 0 rgba(167, 102, 48, 0.24),
-            0 17px 50px rgba(202, 155, 25, 0.19);
+    .lost-something {
+        width: fit-content;
+        margin: 2rem auto;
+        padding: 1rem;
     }
 </style>

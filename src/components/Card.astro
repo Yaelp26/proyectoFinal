@@ -10,8 +10,8 @@ const { name, place, photo, important } = Astro.props;
 
 <div
     class:list={[
-        "item_c text-light text-center rounded-5",
-        { "bg-danger": important, "bg-primary": !important },
+        "item_c text-light text-center rounded-4",
+        { "bg-important": important, "bg-non-important": !important },
     ]}
 >
     <img src={photo} alt="object" />
@@ -22,19 +22,16 @@ const { name, place, photo, important } = Astro.props;
         <p>{place}</p>
     </div>
 
-    <button class="btn reclaimButton rounded-pill">Reclaim</button>
+    <button class="button">Reclaim</button>
 </div>
 <style>
     .item_c {
         height: 20.5rem;
         overflow: hidden;
     }
-    .reclaimButton {
-        background-color: rgb(75, 61, 55);
-        border: 1px solid transparent;
-        padding: 0.3rem 0.25rem;
-        font-size: 1rem;
-        line-height: 1.5;
+
+    .item_c:hover{
+        box-shadow: 0 .5rem 0.5rem 0.5rem rgba(0, 0, 0, 0.2);
     }
 
     .text {
@@ -44,5 +41,9 @@ const { name, place, photo, important } = Astro.props;
         height: 10rem;
         width: 100%;
         object-fit: cover;
+    }
+    button{
+        margin-top: 1.5rem;
+        font-size: 1rem;
     }
 </style>
