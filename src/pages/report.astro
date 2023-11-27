@@ -3,5 +3,76 @@ import Layout from "../layouts/Layout.astro"
 ---
 
 <Layout title="Report page">
-    
+    <div class="container">
+        <h1>Report page</h1>
+        <p>Desde aqui podras mandarnos un correo con la informacion del objeto que perdiste y detalles de donde y cuando lo perdiste.<br> Pero primero ubica tu facultad...</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Facultad</th>
+                    <th>Ubicacion</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Facultad de Ingenieria</td>
+                    <td><button></button></td>
+                </tr>
+                <tr>
+                    <td>Facultad de Computacion</td>
+                    <td><button></button></td>
+                </tr>
+                <tr>
+                    <td>Facultad de Derecho</td>
+                    <td><button></button></td>
+                </tr>
+                <tr>
+                    <td>Facultad de Administacion</td>
+                    <td><button></button></td>
+                </tr>
+                <tr>
+                    <td>Facultad de Contabilidad</td>
+                    <td><button></button></td>
+                </tr>
+                <tr>
+                    <td>Facultad de Biologia</td>
+                    <td><button></button></td>
+                </tr>
+                <tr>
+                    <td>Facultad de Farmacobiologia</td>
+                    <td><button></button></td>
+                </tr>
+                <tr>
+                    <td>Facultad de Fisico-matematicas</td>
+                    <td><button></button></td>
+                </tr>
+                <tr>
+                    <td>Facultad de Artes</td>
+                    <td><button></button></td>
+                </tr>
+                <tr>
+                    <td>Facultad de Cultura Fisica</td>
+                    <td><button></button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </Layout>
+
+<style>
+    .container {
+        height: 100vh;
+    }
+    h1
+    {
+        font-size: 4rem;
+        color: #fff;
+        text-align: center;
+    }
+    p
+    {
+        font-size: 2rem;
+        color: #a3a3a3;
+        text-align: left;
+    }
+</style>

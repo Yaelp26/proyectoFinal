@@ -13,23 +13,39 @@ let i = 1;
 
 <script>
     //functions
-    function isLostObject(lostObject: string) {
-        return /^[a-zA-Z\s]{1,50}$/.test(lostObject) && lostObject.length <= 50;
+    function isLostObject(lostObject: string):boolean {
+        return (/^[a-zA-Z\s]{1,50}$/.test(lostObject) && lostObject.length <= 50) || lostObject.length == 0;
     }
     //variables from html
-    const lostObject = document.getElementById("place") as HTMLInputElement;
-    const faculty = document.getElementById("search-bar") as HTMLInputElement;
+    const faculty = document.getElementById("place") as HTMLInputElement;
+    const lostObject = document.getElementById("search-bar") as HTMLInputElement;
     const filter = document.getElementById("filter");
     const reportButton = document.getElementById(
         "reportButton",
     ) as HTMLButtonElement;
 
-    if (!isLostObject(lostObject.value)) {
-    }
-
     reportButton.onclick = function () {
-        window.location.href = "";
+        window.location.href = "/report";
     };
+
+    if (filter == null) {
+        console.log("ERROR MAXIMO");
+    } else {
+        filter.addEventListener("click", async (e) => {
+            e.preventDefault();
+
+            if (!isLostObject(lostObject.value)) {
+                alert("Ingresa un objeto valido solo letras y espacios");
+                return;
+            }
+
+            const facultyValue = faculty.value;
+            const lostObjectValue = lostObject.value;
+
+            const response = await fetch(`http://127.0.0.1:8000/lost_object?faculty=${facultyValue}&object=${lostObjectValue}`);
+            const { LostObjects } = await response.json();
+        });
+    }
 </script>
 
 <Layout title="search">
