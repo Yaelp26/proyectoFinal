@@ -11,7 +11,6 @@ const { Places } = (await p_res.json()) as ValidPlaces;
 let i = 1;
 
 const a = Astro.request
-
 if (a.method == 'POST')
 {
     const data= (await(a.text()));
@@ -22,21 +21,28 @@ if (a.method == 'POST')
     const place = datas[0][1];
     const object = datas[1][1]; 
     console.log(place, object);
-    if (place != "0" && object != "")
-    {
+    if (place != "0" && object != "") {
         const res = await fetch("http://127.0.0.1:8000/lost_object/by_name/" + object);
-        const response = await res.json() as LostObjectAPI;
-        console.log(response);
-        const { LostObjects: LostObjectsFiltered } = response as LostObjectAPI;
-        if (LostObjectsFiltered.length > 0)
-        {
-            LostObjects = LostObjectsFiltered;
-        }
+        console.log('LostObjects:', LostObjects);
+        const fullResponse = await res.json();
+        console.log('Type of fullResponse:', typeof fullResponse);
+        console.log('Full response:', fullResponse);
+        LostObjects = fullResponse; // Asigna 'fullResponse' a 'LostObjects'
+        console.log('LostObjects:', LostObjects);
     }
-    else if (place != "0")
+    /*
+    else if (place == "0" && object != "")
     {
         const res = await fetch("http://")
     }
+    else if (place != "0" && object == "")
+    {
+        const res = await fetch("http://")
+    }
+    else if (place == "0" && object == "")
+    {
+        const res = await fetch("http://")
+    }*/
 }
 ---
 
@@ -73,6 +79,8 @@ if (a.method == 'POST')
                         place: faculty.value,
                         object: lostObject.value
                     })
+                }).then(() => {
+                    window.location.href = "/search";
                 })
         });
     }
@@ -122,7 +130,7 @@ if (a.method == 'POST')
             <div class="objects-box col-10">
                 {
                     //page changes by filter
-                    LostObjects.map((lo) => (
+                    LostObjects?.map((lo) => (
                         <Card
                             name={lo.object_name}
                             place={
