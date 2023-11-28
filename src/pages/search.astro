@@ -6,9 +6,38 @@ import type { LostObjectAPI, ValidPlaces } from "../types/lost_object";
 const lo_res = await fetch("http://127.0.0.1:8000/lost_object");
 const p_res = await fetch("http://127.0.0.1:8000/lost_object/places");
 
-const { LostObjects } = (await lo_res.json()) as LostObjectAPI;
+let { LostObjects } = (await lo_res.json()) as LostObjectAPI;
 const { Places } = (await p_res.json()) as ValidPlaces;
 let i = 1;
+
+const a = Astro.request
+
+if (a.method == 'POST')
+{
+    const data= (await(a.text()));
+    const decodedData = decodeURIComponent(data);
+    console.log(decodedData);
+    const datas = decodedData.split("&").map(e => e.split("=").map(c => c.replace("+", " ")));
+    console.log(datas);
+    const place = datas[0][1];
+    const object = datas[1][1]; 
+    console.log(place, object);
+    if (place != "0" && object != "")
+    {
+        const res = await fetch("http://127.0.0.1:8000/lost_object/by_name/" + object);
+        const response = await res.json() as LostObjectAPI;
+        console.log(response);
+        const { LostObjects: LostObjectsFiltered } = response as LostObjectAPI;
+        if (LostObjectsFiltered.length > 0)
+        {
+            LostObjects = LostObjectsFiltered;
+        }
+    }
+    else if (place != "0")
+    {
+        const res = await fetch("http://")
+    }
+}
 ---
 
 <script>
@@ -16,10 +45,11 @@ let i = 1;
     function isLostObject(lostObject: string):boolean {
         return (/^[a-zA-Z\s]{1,50}$/.test(lostObject) && lostObject.length <= 50) || lostObject.length == 0;
     }
+
     //variables from html
     const faculty = document.getElementById("place") as HTMLInputElement;
     const lostObject = document.getElementById("search-bar") as HTMLInputElement;
-    const filter = document.getElementById("filter");
+    const filter = document.getElementById("filter") as HTMLButtonElement;
     const reportButton = document.getElementById(
         "reportButton",
     ) as HTMLButtonElement;
@@ -31,19 +61,19 @@ let i = 1;
     if (filter == null) {
         console.log("ERROR MAXIMO");
     } else {
-        filter.addEventListener("click", async (e) => {
+        filter.addEventListener("click", (e) => {
             e.preventDefault();
-
             if (!isLostObject(lostObject.value)) {
                 alert("Ingresa un objeto valido solo letras y espacios");
                 return;
             }
-
-            const facultyValue = faculty.value;
-            const lostObjectValue = lostObject.value;
-
-            const response = await fetch(`http://127.0.0.1:8000/lost_object?faculty=${facultyValue}&object=${lostObjectValue}`);
-            const { LostObjects } = await response.json();
+            fetch(
+                '/search',{
+                    method: 'POST', body: new URLSearchParams({
+                        place: faculty.value,
+                        object: lostObject.value
+                    })
+                })
         });
     }
 </script>
@@ -51,7 +81,7 @@ let i = 1;
 <Layout title="search">
     <div class="container">
         <div class="row justify-content-center">
-            <form
+            <form method='POST' id="search-form"
                 class="col-10 text-light text-center bg-translucid rounded-4 justify-content-center"
             >
                 <div class="d-flex gap-5 flex-column flex-md-row">
