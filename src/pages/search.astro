@@ -16,33 +16,34 @@ if (a.method == 'POST')
     const data= (await(a.text()));
     const decodedData = decodeURIComponent(data);
     console.log(decodedData);
-    const datas = decodedData.split("&").map(e => e.split("=").map(c => c.replace("+", " ")));
+    let datas = decodedData.split("&").map(e => e.split("=").map(c => c.replace("+", " ")));
+    console.log(datas);
+    console.log(datas.length);
+    if(datas.length == 1)
+    {
+        datas.unshift(["0","0"]);
+    }
     console.log(datas);
     const place = datas[0][1];
     const object = datas[1][1]; 
     console.log(place, object);
     if (place != "0" && object != "") {
         const res = await fetch("http://127.0.0.1:8000/lost_object/by_name/" + object);
-        console.log('LostObjects:', LostObjects);
         const fullResponse = await res.json();
-        console.log('Type of fullResponse:', typeof fullResponse);
-        console.log('Full response:', fullResponse);
-        LostObjects = fullResponse; // Asigna 'fullResponse' a 'LostObjects'
-        console.log('LostObjects:', LostObjects);
+        LostObjects = fullResponse.filter((e) => e.place == place);
     }
-    /*
     else if (place == "0" && object != "")
     {
-        const res = await fetch("http://")
+        const res = await fetch("http://127.0.0.1:8000/lost_object/by_name/" + object);
+        const fullResponse = await res.json();
+        LostObjects = fullResponse;
     }
     else if (place != "0" && object == "")
     {
-        const res = await fetch("http://")
+        const res = await fetch("http://127.0.0.1:8000/lost_object/by_place/" + place);
+        const fullResponse = await res.json();
+        LostObjects = fullResponse;
     }
-    else if (place == "0" && object == "")
-    {
-        const res = await fetch("http://")
-    }*/
 }
 ---
 
@@ -68,20 +69,11 @@ if (a.method == 'POST')
         console.log("ERROR MAXIMO");
     } else {
         filter.addEventListener("click", (e) => {
-            e.preventDefault();
             if (!isLostObject(lostObject.value)) {
+                e.preventDefault();
                 alert("Ingresa un objeto valido solo letras y espacios");
                 return;
             }
-            fetch(
-                '/search',{
-                    method: 'POST', body: new URLSearchParams({
-                        place: faculty.value,
-                        object: lostObject.value
-                    })
-                }).then(() => {
-                    window.location.href = "/search";
-                })
         });
     }
 </script>
@@ -99,7 +91,7 @@ if (a.method == 'POST')
                     >
                         Faculty
                         <select id="place" name="place" class="input-button">
-                            <option value="0" disabled selected
+                            <option value='0' disabled selected
                                 >-- Selecciona una facultad --</option
                             >
                             {

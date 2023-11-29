@@ -4,9 +4,9 @@ import Layout from "../layouts/Layout.astro"
 
 <Layout title="Report page">
     <div class="container">
-        <h1>Report page</h1>
+        <h1 class="col-12 text-center font-family-logo">Report page</h1>
         <p>Desde aqui podras mandarnos un correo con la informacion del objeto que perdiste y detalles de donde y cuando lo perdiste.<br> Pero primero ubica tu facultad...</p>
-        <table>
+        <table class="col-12 col-md-6">
             <thead>
                 <tr>
                     <th>Facultad</th>
@@ -16,46 +16,47 @@ import Layout from "../layouts/Layout.astro"
             <tbody>
                 <tr>
                     <td>Facultad de Ingenieria</td>
-                    <td><button></button></td>
+                    <td class="btn-1 text-center"><button>Location</button></td>
                 </tr>
                 <tr>
                     <td>Facultad de Computacion</td>
-                    <td><button></button></td>
+                    <td class="btn-2 text-center"><button>Location</button></td>
                 </tr>
                 <tr>
                     <td>Facultad de Derecho</td>
-                    <td><button></button></td>
+                    <td class="btn-3 text-center"><button>Location</button></td>
                 </tr>
                 <tr>
                     <td>Facultad de Administacion</td>
-                    <td><button></button></td>
+                    <td class="btn-4 text-center"><button>Location</button></td>
                 </tr>
                 <tr>
                     <td>Facultad de Contabilidad</td>
-                    <td><button></button></td>
+                    <td class="btn-5 text-center"><button>Location</button></td>
                 </tr>
                 <tr>
                     <td>Facultad de Biologia</td>
-                    <td><button></button></td>
+                    <td class="btn-6 text-center"><button>Location</button></td>
                 </tr>
                 <tr>
                     <td>Facultad de Farmacobiologia</td>
-                    <td><button></button></td>
+                    <td class="btn-7 text-center"><button>Location</button></td>
                 </tr>
                 <tr>
                     <td>Facultad de Fisico-matematicas</td>
-                    <td><button></button></td>
+                    <td class="btn-8 text-center"><button>Location</button></td>
                 </tr>
                 <tr>
                     <td>Facultad de Artes</td>
-                    <td><button></button></td>
+                    <td class="btn-9 text-center"><button>Location</button></td>
                 </tr>
                 <tr>
                     <td>Facultad de Cultura Fisica</td>
-                    <td><button></button></td>
+                    <td class="btn-10 text-center"><button>Location</button></td>
                 </tr>
             </tbody>
         </table>
+        <img src="../images/cu-general.jpg" class="col-12 col-md-6">
     </div>
 </Layout>
 
@@ -65,14 +66,24 @@ import Layout from "../layouts/Layout.astro"
     }
     h1
     {
-        font-size: 4rem;
-        color: #fff;
-        text-align: center;
+        font-size: 5rem;
+        color: white;
+        margin-bottom: 0rem;
     }
     p
     {
-        font-size: 2rem;
-        color: #a3a3a3;
+        font-size: 1.5rem;
+        color: white;
         text-align: left;
+    }
+    td{
+        font-size: 1rem;
+        color: white;
+        text-align: left;
+    }
+    th{
+        font-size: 1.5rem;
+        color:crimson;
+        text-align: center;
     }
 </style>
