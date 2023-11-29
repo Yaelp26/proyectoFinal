@@ -30,6 +30,7 @@ if (a.method == 'POST')
     if (place != "0" && object != "") {
         const res = await fetch("http://127.0.0.1:8000/lost_object/by_name/" + object);
         const fullResponse = await res.json();
+        // @ts-ignore
         LostObjects = fullResponse.filter((e) => e.place == place);
     }
     else if (place == "0" && object != "")

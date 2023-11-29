@@ -1,12 +1,28 @@
 ---
 import Layout from "../layouts/Layout.astro"
 ---
+<script>
+    // Select all buttons and the image
+    const buttons = document.querySelectorAll('table button');
+    const image = document.querySelector('.locateImg');
+
+    // For each button
+    buttons.forEach((button, index) => {
+        // Add a click event listener
+        button.addEventListener('click', () => {
+            // Change the image src
+            // @ts-ignore
+            image.src = `src/images/cu-${index + 1}.jpg`; 
+        });
+    });
+</script>
 
 <Layout title="Report page">
     <div class="container">
         <h1 class="col-12 text-center font-family-logo">Report page</h1>
         <p>Desde aqui podras mandarnos un correo con la informacion del objeto que perdiste y detalles de donde y cuando lo perdiste.<br> Pero primero ubica tu facultad...</p>
-        <table class="col-12 col-md-6">
+        <div class="row justify-content-center">
+            <table class="col-10 col-md-5">
             <thead>
                 <tr>
                     <th>Facultad</th>
@@ -16,53 +32,113 @@ import Layout from "../layouts/Layout.astro"
             <tbody>
                 <tr>
                     <td>Facultad de Ingenieria</td>
-                    <td class="btn-1 text-center"><button>Location</button></td>
+                    <td class=" text-center"><button class="button">Location</button></td>
                 </tr>
                 <tr>
                     <td>Facultad de Computacion</td>
-                    <td class="btn-2 text-center"><button>Location</button></td>
+                    <td class=" text-center"><button class="button">Location</button></td>
                 </tr>
                 <tr>
                     <td>Facultad de Derecho</td>
-                    <td class="btn-3 text-center"><button>Location</button></td>
+                    <td class=" text-center"><button class="button">Location</button></td>
                 </tr>
                 <tr>
                     <td>Facultad de Administacion</td>
-                    <td class="btn-4 text-center"><button>Location</button></td>
+                    <td class=" text-center"><button class="button">Location</button></td>
                 </tr>
                 <tr>
                     <td>Facultad de Contabilidad</td>
-                    <td class="btn-5 text-center"><button>Location</button></td>
+                    <td class=" text-center"><button class="button">Location</button></td>
                 </tr>
                 <tr>
                     <td>Facultad de Biologia</td>
-                    <td class="btn-6 text-center"><button>Location</button></td>
+                    <td class=" text-center"><button class="button">Location</button></td>
                 </tr>
                 <tr>
                     <td>Facultad de Farmacobiologia</td>
-                    <td class="btn-7 text-center"><button>Location</button></td>
+                    <td class=" text-center"><button class="button">Location</button></td>
                 </tr>
                 <tr>
                     <td>Facultad de Fisico-matematicas</td>
-                    <td class="btn-8 text-center"><button>Location</button></td>
+                    <td class=" text-center"><button class="button">Location</button></td>
                 </tr>
                 <tr>
                     <td>Facultad de Artes</td>
-                    <td class="btn-9 text-center"><button>Location</button></td>
+                    <td class=" text-center"><button class="button">Location</button></td>
                 </tr>
                 <tr>
                     <td>Facultad de Cultura Fisica</td>
-                    <td class="btn-10 text-center"><button>Location</button></td>
+                    <td class="text-center"><button class="button">Location</button></td>
                 </tr>
             </tbody>
         </table>
-        <img src="../images/cu-general.jpg" class="col-12 col-md-6">
+        <img src="src/images/cu-general.jpg" class="locateImg col-12 col-md-6">
+        </div>
+        <div class="row justify-content-center">
+        <form class="col-10 text-light text-center bg-translucid rounded-4 justify-content-center" action="mailto:lostbuap@hotmail.com" method="post" enctype="text/plain">
+            <div class="d-flex gap-3 flex-column flex-md-row">
+                <label
+                    for="name"
+                    class="d-flex flex-column justify-content-around"
+                >
+                    Nombre:
+                    <input
+                        type="text"
+                        placeholder="Juanito Perez"
+                        class="input-button"
+                    />
+                </label>
+                <label
+                    for="name"
+                    class="d-flex flex-column justify-content-around"
+                >
+                    Objeto:
+                    <input
+                        type="text"
+                        placeholder="Cable HDMI"
+                        class="input-button"
+                    />
+                </label>
+                <label
+                    for="name"
+                    class="d-flex flex-column justify-content-around"
+                >
+                    Lugar:
+                    <input
+                        type="text"
+                        placeholder="Facultad de ..."
+                        class="input-button"
+                    />
+                </label>
+                <label
+                    for="name"
+                    class="d-flex flex-column justify-content-around"
+                >
+                    Imagen:
+                    <input
+                        type="file"
+                    />
+                </label>
+            </div>
+            <button type="submit" class="button">Enviar</button>
+          </form>
+        </div>
+        <div class="back-search justify-content-center bg-important rounded-4 text-light fw-bold">
+            <p class="font-urbanist text-center mt-2">Back to search</p>
+            <button type="button" class="button" id="reportButton" onclick="location.href='/search'"
+                >Back Here</button
+            >
+        </div>
     </div>
 </Layout>
 
 <style>
     .container {
-        height: 100vh;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
     h1
     {
@@ -86,4 +162,36 @@ import Layout from "../layouts/Layout.astro"
         color:crimson;
         text-align: center;
     }
+    form {
+    margin: 2rem 0 0 0; /* Adjust the bottom margin */
+    padding: 2rem 4rem;
+    font-size: 1rem;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    gap: 1rem;
+    justify-items: center;
+}
+    label {
+        font-size: 1rem;
+        height: 3rem;
+    }
+    .locateImg{
+        border : 3px solid white;
+    }
+    .back-search {
+        width: fit-content;
+        padding: 1rem;
+        margin: 1rem auto; /* Añade auto para centrar horizontalmente */
+        display: flex; /* Añade flex para alinear los elementos hijos */
+        flex-direction: column; /* Alinea los elementos hijos verticalmente */
+        align-items: center; /* Centra los elementos hijos horizontalmente */
+        justify-content: center; /* Centra los elementos hijos verticalmente */
+    }
+    form .button {
+    width: 50%; /* Ajusta esto a lo que necesites */
+    height: 2rem; /* Ajusta esto a lo que necesites */
+}
+    input,
+    button,
+
 </style>
