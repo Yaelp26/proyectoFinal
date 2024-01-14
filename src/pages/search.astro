@@ -15,18 +15,13 @@ if (a.method == 'POST')
 {
     const data= (await(a.text()));
     const decodedData = decodeURIComponent(data);
-    console.log(decodedData);
     let datas = decodedData.split("&").map(e => e.split("=").map(c => c.replace("+", " ")));
-    console.log(datas);
-    console.log(datas.length);
     if(datas.length == 1)
     {
         datas.unshift(["0","0"]);
     }
-    console.log(datas);
     const place = datas[0][1];
     const object = datas[1][1]; 
-    console.log(place, object);
     if (place != "0" && object != "") {
         const res = await fetch("http://127.0.0.1:8000/lost_object/by_name/" + object);
         const fullResponse = await res.json();

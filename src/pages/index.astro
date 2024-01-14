@@ -8,7 +8,6 @@ if (a.method == 'POST')
     const data= (await(a.text()));
     const decodedData = decodeURIComponent(data);
     const datas = decodedData.split("&").map(e => e.split("=").map(c => c.split("+")));
-    console.log(datas);
     if(datas[1]) {
         const s_est:Student = await fetch("http://127.0.0.1:8000/student/"+datas[1][1] )
         .then(response => {
@@ -18,7 +17,6 @@ if (a.method == 'POST')
             return response.json();
         })
         .catch(error => console.error(error));
-        console.log(s_est)
         if(s_est != undefined && s_est.first_name == datas[0][1][0] && s_est.last_name == datas[0][1][1] )
         {
             return Astro.redirect("/search");
@@ -45,7 +43,7 @@ const login = document.getElementById("login") as HTMLButtonElement;
 
 if (login == null) {
     console.log("ERROR MAXIMO");
-} else {
+} else {	
     login.addEventListener("click", (e) => {
         if (!isRegister(register.value) || !isUsername(username.value)) {
             e.preventDefault();
